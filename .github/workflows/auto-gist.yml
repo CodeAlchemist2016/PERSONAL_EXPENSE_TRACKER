@@ -19,11 +19,12 @@ jobs:
           FILES_JSON="{ \"description\": \"Filtered project files\", \"public\": true, \"files\": {"
           
           for FILE in $(find . -type f \( -name "*.txt" -o -name "*.md" -o -name "*.js" -o -name "*.ts" -o -name "*.java" -o -name "*.html" -o -name "*.css" \) -not -path "./.git/*" -not -path "./.github/workflows/*"); do
-            CONTENT=$(cat "$FILE" | jq -Rs .)  # Convert file content to JSON-safe format
-            FILES_JSON="$FILES_JSON \"$FILE\": { \"content\": $CONTENT },"
+            FILENAME=$(basename "$FILE")  # Extracts just the filename (removes directory paths)
+            CONTENT=$(cat "$FILE" | jq -Rs .)  # Formats content for JSON
+            FILES_JSON="$FILES_JSON \"$FILENAME\": { \"content\": $CONTENT },"
           done
           
-          FILES_JSON="${FILES_JSON%,} }}"  # Remove trailing comma and close JSON structure
+          FILES_JSON="${FILES_JSON%,} }}"  # Ensures correct JSON formatting
           
           curl -X POST https://api.github.com/gists \
             -H "Authorization: token ${{ secrets.GIST_TOKEN }}" \
