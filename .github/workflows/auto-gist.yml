@@ -15,7 +15,7 @@ jobs:
       - name: Create a Gist
         run: |
           curl -X POST https://api.github.com/gists \
-          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Authorization: token ${{ secrets.GIST_TOKEN }}" \
           -d '{
             "description": "Auto-generated gist for latest commit",
             "public": true,
