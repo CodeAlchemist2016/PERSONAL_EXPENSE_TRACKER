@@ -3,7 +3,7 @@ name: Create a Gist with all project files
 on:
   push:
     branches:
-      - main  # Runs on push to 'main'
+      - main  # Runs when changes are pushed to 'main'
 
 jobs:
   create_gist:
@@ -12,17 +12,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Collect all project files
+      - name: Collect all text files
         run: |
-          echo "Collecting all project files..."
+          echo "Collecting all text files..."
           
-          FILES_JSON="{ \"description\": \"Project Files Gist\", \"public\": true, \"files\": {"
-          for FILE in $(find . -type f -not -path "./.git/*" -not -path "./.github/workflows/*"); do
+          FILES_JSON="{ \"description\": \"Filtered project files\", \"public\": true, \"files\": {"
+          
+          for FILE in $(find . -type f \( -name "*.txt" -o -name "*.md" -o -name "*.js" -o -name "*.ts" -o -name "*.java" -o -name "*.html" -o -name "*.css" \) -not -path "./.git/*" -not -path "./.github/workflows/*"); do
             CONTENT=$(cat "$FILE" | jq -Rs .)  # Convert file content to JSON-safe format
             FILES_JSON="$FILES_JSON \"$FILE\": { \"content\": $CONTENT },"
           done
+          
           FILES_JSON="${FILES_JSON%,} }}"  # Remove trailing comma and close JSON structure
           
           curl -X POST https://api.github.com/gists \
-          -H "Authorization: token ${{ secrets.GIST_TOKEN }}" \
-          -d "$FILES_JSON"
+            -H "Authorization: token ${{ secrets.GIST_TOKEN }}" \
+            -d "$FILES_JSON"
