@@ -1,34 +1,16 @@
-name: Create a Gist with all project files
+  name: Create a Gist with all project files
+  run: |
+    echo "Collecting all project files..."
+    
+    FILES_JSON="{ \"description\": \"Project Files Gist\", \"public\": true, \"files\": {"
 
-on:
-  push:
-    branches:
-      - main  # Runs on push to 'main'
+    for FILE in $(find . -type f -not -path "./.git/*" -not -path "./.github/workflows/*"); do
+      CONTENT=$(cat "$FILE" | jq -Rs .)  # Convert file content to JSON-safe format
+      FILES_JSON="$FILES_JSON \"$FILE\": { \"content\": $CONTENT },"
+    done
 
-jobs:
-  create_gist:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Archive project files
-        run: |
-          echo "Archiving all project files..."
-          zip -r project_files.zip . -x ".git/*" ".github/workflows/*"
-
-      - name: Convert ZIP to base64
-        run: |
-          BASE64_ZIP=$(base64 project_files.zip)
-
-          curl -X POST https://api.github.com/gists \
-          -H "Authorization: token ${{ secrets.GIST_TOKEN }}" \
-          -d '{
-            "description": "Full project archive",
-            "public": true,
-            "files": {
-              "project_files.zip": {
-                "content": "'"$BASE64_ZIP"'"
-              }
-            }
-          }'
+    FILES_JSON="${FILES_JSON%,} }}"  # Remove trailing comma and close JSON structure
+    
+    curl -X POST https://api.github.com/gists \
+      -H "Authorization: token ${{ secrets.GIST_TOKEN }}" \
+      -d "$FILES_JSON"
