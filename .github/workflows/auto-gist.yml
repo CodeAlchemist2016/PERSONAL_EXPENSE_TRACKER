@@ -1,27 +1,21 @@
-name: Auto Gist Generator
+- name: Create a Gist with all project files
+  run: |
+    echo "Archiving all project files..."
+    
+    # Create a ZIP archive of the entire repository
+    zip -r project_files.zip . -x ".git/*" ".github/workflows/*"
 
-on:
-  push:
-    branches:
-      - main  # Runs when code is pushed to 'main' branch
+    # Convert ZIP to base64 to send via API
+    BASE64_ZIP=$(base64 project_files.zip)
 
-jobs:
-  create_gist:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Create a Gist
-        run: |
-          curl -X POST https://api.github.com/gists \
-          -H "Authorization: token ${{ secrets.GIST_TOKEN }}" \
-          -d '{
-            "description": "Auto-generated gist for latest commit",
-            "public": true,
-            "files": {
-              "latest_commit.txt": {
-                "content": "'"$(git log -1 --pretty=%B)"'"
-              }
-            }
-          }'
+    curl -X POST https://api.github.com/gists \
+    -H "Authorization: token ${{ secrets.GIST_TOKEN }}" \
+    -d '{
+      "description": "Full project archive",
+      "public": true,
+      "files": {
+        "project_files.zip": {
+          "content": "'"$BASE64_ZIP"'"
+        }
+      }
+    }'
