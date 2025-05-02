@@ -1,0 +1,60 @@
+<mat-card>
+  <mat-card-title>Dashboard Overview</mat-card-title>
+  <mat-card-content>
+    <div class="dashboard-grid">
+      <div class="dashboard-box">
+        <h3>Total Balance: {{ totalBalance() | currency }}</h3>
+      </div>
+      <div class="dashboard-box">
+        <ngx-charts-bar-vertical
+          [results]="transactionChartData()"
+          [scheme]="colorScheme"
+          [view]="[700, 400]"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="true"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          [xAxisLabel]="'Month'"
+          [yAxisLabel]="'Expenses'"
+        ></ngx-charts-bar-vertical>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+
+
+<!--<mat-card>-->
+<!--  <mat-card-title>Balance Overview</mat-card-title>-->
+<!--  <mat-card-content>-->
+<!--    <ng-container *ngIf="accounts().length > 0; else noAccounts">-->
+<!--      <div *ngFor="let account of accounts()">-->
+<!--        <h3>{{ account.accountType }}: {{ account.balance | currency }}</h3>-->
+<!--      </div>-->
+<!--    </ng-container>-->
+<!--    <ng-template #noAccounts>-->
+<!--      <p>No accounts found.</p> &lt;!&ndash; ✅ Debugging visibility &ndash;&gt;-->
+<!--    </ng-template>-->
+<!--  </mat-card-content>-->
+<!--</mat-card>-->
+
+<!--<ngx-charts-bar-vertical-->
+<!--  [results]="transactionChartData()"-->
+<!--  [scheme]="colorScheme"-->
+<!--  [view]="[700, 400]"-->
+<!--  [xAxis]="true"-->
+<!--  [yAxis]="true"-->
+<!--  [legend]="true"-->
+<!--  [showXAxisLabel]="true"-->
+<!--  [showYAxisLabel]="true"-->
+<!--  [xAxisLabel]="'Month'"-->
+<!--  [yAxisLabel]="'Expenses'"-->
+<!--&gt;-->
+<!--</ngx-charts-bar-vertical>-->
+
+
+<!--<p *ngIf="transactionChartData().length === 0">No data available.</p>-->
+<!--<button (click)="refreshChart()">Refresh Chart</button>-->
+
+

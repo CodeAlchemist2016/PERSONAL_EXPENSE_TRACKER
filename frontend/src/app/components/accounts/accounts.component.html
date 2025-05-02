@@ -1,0 +1,24 @@
+<mat-card>
+  <mat-card-title>Accounts Overview</mat-card-title>
+  <mat-card-content>
+    <ng-container *ngIf="accounts().length > 0; else noAccounts">
+      <table class="account-table">
+        <thead>
+        <tr>
+          <th>Account Type</th>
+          <th>Balance</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let account of accounts()">
+          <td>{{ account.accountType }}</td>
+          <td>{{ account.balance | currency }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </ng-container>
+    <ng-template #noAccounts>
+      <p>No accounts found.</p> <!-- ✅ Ensures visibility when data is empty -->
+    </ng-template>
+  </mat-card-content>
+</mat-card>
