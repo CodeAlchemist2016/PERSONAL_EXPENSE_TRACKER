@@ -1,21 +1,34 @@
-- name: Create a Gist with all project files
-  run: |
-    echo "Archiving all project files..."
-    
-    # Create a ZIP archive of the entire repository
-    zip -r project_files.zip . -x ".git/*" ".github/workflows/*"
+name: Create a Gist with all project files
 
-    # Convert ZIP to base64 to send via API
-    BASE64_ZIP=$(base64 project_files.zip)
+on:
+  push:
+    branches:
+      - main  # Runs on push to 'main'
 
-    curl -X POST https://api.github.com/gists \
-    -H "Authorization: token ${{ secrets.GIST_TOKEN }}" \
-    -d '{
-      "description": "Full project archive",
-      "public": true,
-      "files": {
-        "project_files.zip": {
-          "content": "'"$BASE64_ZIP"'"
-        }
-      }
-    }'
+jobs:
+  create_gist:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Archive project files
+        run: |
+          echo "Archiving all project files..."
+          zip -r project_files.zip . -x ".git/*" ".github/workflows/*"
+
+      - name: Convert ZIP to base64
+        run: |
+          BASE64_ZIP=$(base64 project_files.zip)
+
+          curl -X POST https://api.github.com/gists \
+          -H "Authorization: token ${{ secrets.GIST_TOKEN }}" \
+          -d '{
+            "description": "Full project archive",
+            "public": true,
+            "files": {
+              "project_files.zip": {
+                "content": "'"$BASE64_ZIP"'"
+              }
+            }
+          }'
