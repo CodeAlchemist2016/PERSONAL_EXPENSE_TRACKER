@@ -16,29 +16,47 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install -y jq  # ✅ Ensures jq is installed
 
-      - name: Collect and upload all text files in one gist
+      - name: Collect and upload text files in batches
         run: |
-          echo "Collecting all text files..."
-          
-          FILES_JSON="{ \"description\": \"Complete project files\", \"public\": true, \"files\": {"
+            echo "Collecting all text files..."
+            
+            FILES_JSON="{ \"description\": \"Filtered project files\", \"public\": true, \"files\": {"
+            COUNT=0
+            MAX_FILES=10  # ✅ Adjust batch size based on API limits
 
-          # ✅ Search inside backend/ and frontend/ instead of incorrect paths
-          for FILE in $(find backend frontend -type f \( -name "*.txt" -o -name "*.md" -o -name "*.js" -o -name "*.ts" -o -name "*.java" -o -name "*.html" -o -name "*.css" \)); do
-            if [ ! -s "$FILE" ]; then  # ✅ Skip empty files to prevent "gist file cannot be blank" error
-              echo "Skipping empty file: $FILE"
-              continue
+            # ✅ Explicitly search inside backend/ and frontend/ instead of "."
+            for FILE in $(find backend frontend -type f \( -name "*.txt" -o -name "*.md" -o -name "*.js" -o -name "*.ts" -o -name "*.java" -o -name "*.html" -o -name "*.css" \)); do
+              if [ ! -s "$FILE" ]; then  # ✅ Skip empty files to prevent "gist file cannot be blank" error
+                echo "Skipping empty file: $FILE"
+                continue
+              fi
+
+              FILENAME=$(basename "$FILE")
+              CONTENT=$(jq -Rs . < "$FILE")
+              FILES_JSON="$FILES_JSON \"$FILENAME\": { \"content\": $CONTENT },"
+              
+              COUNT=$((COUNT + 1))
+              
+              if [ "$COUNT" -ge "$MAX_FILES" ]; then
+                FILES_JSON="${FILES_JSON%,} }}"  # ✅ Close JSON object
+
+                curl -X POST https://api.github.com/gists \
+                  -H "Authorization: token ${{ secrets.GIST_TOKEN }}" \
+                  -d "$FILES_JSON"
+
+                echo "Uploaded batch of $MAX_FILES files"
+                
+                FILES_JSON="{ \"description\": \"Filtered project files\", \"public\": true, \"files\": {"  # ✅ Reset JSON
+                COUNT=0
+              fi
+            done
+
+            # ✅ Upload remaining files
+            if [ "$COUNT" -gt 0 ]; then
+              FILES_JSON="${FILES_JSON%,} }}"
+              curl -X POST https://api.github.com/gists \
+                -H "Authorization: token ${{ secrets.GIST_TOKEN }}" \
+                -d "$FILES_JSON"
+              echo "Uploaded final batch of files"
             fi
 
-            FILENAME=$(basename "$FILE")
-            CONTENT=$(jq -Rs . < "$FILE")
-            FILES_JSON="$FILES_JSON \"$FILENAME\": { \"content\": $CONTENT },"
-          done
-
-          FILES_JSON="${FILES_JSON%,} }}"  # ✅ Close JSON object
-
-          # ✅ Upload all files in a single gist
-          curl -X POST https://api.github.com/gists \
-            -H "Authorization: token ${{ secrets.GIST_TOKEN }}" \
-            -d "$FILES_JSON"
-
-          echo "Uploaded all files in one gist"
