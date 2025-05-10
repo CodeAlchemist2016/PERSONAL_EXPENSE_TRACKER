@@ -28,6 +28,18 @@ public class Account {
     @Column(name = "Account_Type", nullable = false)
     private AccountType accountType;
 
+    @Column(name = "Investment_Type")
+    private String investmentType;
+
+    @Column(name = "Portfolio_Value", precision = 10, scale = 2)
+    private BigDecimal portfolioValue;
+
+    @Column(name = "Bank_Name")
+    private String bankName;
+
+    @Column(name = "Account_Number", length = 4)
+    private String accountNumber;
+
     @Column(name = "Balance", precision = 10, scale = 2)
     private BigDecimal balance = BigDecimal.ZERO;
 

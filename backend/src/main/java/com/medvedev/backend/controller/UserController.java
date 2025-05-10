@@ -50,7 +50,9 @@ public class UserController {
                                         account.getAccountType().name(), // ✅ Convert Enum to String
                                         account.getBalance(),
                                         account.getMaxSpending(), // ✅ Added maxSpending field
-                                        account.getTotalTransactions()))
+                                        account.getTotalTransactions(),
+                                        account.getAccountNumber(),
+                                        account.getBankName()))
                                 .collect(Collectors.toList())) // ✅ Ensure stream is collected properly
                         .build()) // ✅ Properly closes the Builder pattern
                 .collect(Collectors.toList()); // ✅ Collect the mapped list

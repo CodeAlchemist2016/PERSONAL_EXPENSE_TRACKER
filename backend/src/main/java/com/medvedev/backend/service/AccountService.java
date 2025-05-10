@@ -3,10 +3,14 @@ package com.medvedev.backend.service;
 import com.medvedev.backend.dto.AccountSummaryDTO;
 import com.medvedev.backend.entity.Account;
 import com.medvedev.backend.repository.AccountRepository;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.metamodel.SingularAttribute;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
@@ -40,5 +44,29 @@ public class AccountService {
         return accounts.stream()
                 .map(Account::getBalance)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public Account createAccount(Account account) {
+        return accountRepository.save(account);
+    }
+
+    public Account updateAccount(Integer id, Account updatedAccount) {
+        return accountRepository.findById(id)
+                .map(existingAccount -> {
+                    existingAccount.setAccountNumber(updatedAccount.getAccountNumber());
+                    existingAccount.setBalance(updatedAccount.getBalance());
+                    existingAccount.setBankName(updatedAccount.getBankName());
+                    existingAccount.setAccountType(updatedAccount.getAccountType());
+                    return accountRepository.save(existingAccount);
+                })
+                .orElseThrow(() -> new EntityNotFoundException("Account not found"));
+    }
+
+
+    public void deleteAccount(Integer id) {
+        if (!accountRepository.existsById(id)) {
+            throw new EntityNotFoundException("Account not found for ID: " + id);
+        }
+        accountRepository.deleteById(id);
     }
 }

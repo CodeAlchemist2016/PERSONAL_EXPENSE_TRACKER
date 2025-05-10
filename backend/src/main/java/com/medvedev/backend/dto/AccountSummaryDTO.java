@@ -15,4 +15,6 @@ public class AccountSummaryDTO {
     private BigDecimal balance;
     private BigDecimal maxSpending; // Optional
     private Integer totalTransactions;
+    private String accountNumber;
+    private String bankName;
 }

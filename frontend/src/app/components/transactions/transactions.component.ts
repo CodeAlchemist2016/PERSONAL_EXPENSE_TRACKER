@@ -1,4 +1,4 @@
-import {Component, effect, inject, signal, WritableSignal} from '@angular/core';
+import {Component, inject, signal} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {TransactionService} from '../../shared/services/transactions.service';
 import {MatCard, MatCardContent, MatCardTitle} from '@angular/material/card';
@@ -40,9 +40,9 @@ import {HttpClient} from '@angular/common/http';
 
 
   users = signal<{ id: number; name: string }[]>([]);
-  accounts = signal<{ id: number; accountType: string }[]>([]);
-  categories = signal<{ id: number; name: string }[]>([]);
-  paymentMethods = signal<{ id: number; methodName: string }[]>([]);
+  accounts = this.accountService.accounts;
+  categories = this.transactionService.categories;
+  paymentMethods = this.transactionService.paymentMethods;
 
   constructor() {
     this.loadUsers();

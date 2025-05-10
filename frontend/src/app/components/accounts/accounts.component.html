@@ -1,24 +1,42 @@
 <mat-card>
   <mat-card-title>Accounts Overview</mat-card-title>
   <mat-card-content>
-    <ng-container *ngIf="accounts().length > 0; else noAccounts">
+    <ng-container *ngIf="accounts().length > 0; else accountTable">
       <table class="account-table">
         <thead>
         <tr>
           <th>Account Type</th>
           <th>Balance</th>
+          <th>Bank Name</th>
+          <th>Investment Type</th>
+          <th>Portfolio Value</th>
+          <th>Account Number</th>
+          <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let account of accounts()">
           <td>{{ account.accountType }}</td>
           <td>{{ account.balance | currency }}</td>
+          <td>{{ account.bankName }}</td>
+          <td>{{ account.investmentType }}</td>
+          <td>{{ account.portfolioValue }}</td>
+          <td>****{{ account.accountNumber }}</td>
+          <td>
+            <button (click)="deleteAccount(account.id)">🗑️ Delete</button>
+          </td>
         </tr>
         </tbody>
       </table>
     </ng-container>
-    <ng-template #noAccounts>
-      <p>No accounts found.</p> <!-- ✅ Ensures visibility when data is empty -->
+    <ng-template #accountTable>
+      <p>Your account list is empty! Start by adding your first account below.</p>
     </ng-template>
+
+    <!-- Keep navigation button -->
+    <button routerLink="/add-account"
+            class="add-account-button">➕ Add Account
+    </button>
+
   </mat-card-content>
 </mat-card>

@@ -12,8 +12,8 @@
       </thead>
       <tbody>
       <tr *ngFor="let transaction of transactions()">
-        <td>{{ transaction.date }}</td>
-        <td>{{ transaction.category }}</td>
+        <td>{{ transaction.transactionDate }}</td>
+        <td>{{ transaction.categoryName }}</td>
         <td>{{ transaction.amount | currency }}</td>
         <td>{{ transaction.description }}</td>
       </tr>
@@ -30,9 +30,11 @@
       <tr>
         <th>Date</th>
         <th>User</th>
-        <th>Account</th>
-        <th>Category</th>
+        <th>Account Type</th>
+        <th>Expense Category</th>
         <th>Payment Method</th>
+        <th>Quantity</th>
+        <th>Price</th>
         <th>Amount</th>
         <th>Description</th>
       </tr>

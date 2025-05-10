@@ -1,2 +1,11 @@
+<nav class="navbar">
+  <a routerLink="/dashboard">Dashboard</a>
+  <a routerLink="/transactions">Transactions</a>
+  <a routerLink="/accounts">Accounts</a>
+  <a routerLink="/add-account">Add Account</a>
+  <a routerLink="/app-users">Users</a>
+  <a routerLink="/login" *ngIf="!loggedInUser()">Login</a>
+  <a (click)="handleLogout()" *ngIf="loggedInUser()">Logout</a>
+</nav>
 <router-outlet></router-outlet>
 

@@ -1,5 +1,7 @@
 import {inject, Injectable, signal, WritableSignal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Transaction} from '../../models/transaction.model';
 
 @Injectable({
               providedIn: 'root'
@@ -68,22 +70,25 @@ import {HttpClient} from '@angular/common/http';
 
 
   loadPaymentMethods() {
-    this.http.get<{ id: number; methodName: string }[]>('http://localhost:8080/api/payment-methods').
+    this.http.get<{ content: {id: number; methodName: string }[]}>('http://localhost:8080/api/payment-methods').
       subscribe({
                   next: response => {
                     console.log("Payment methods fetched:",
                                 response); // ✅ Debug data structure
-                    this.paymentMethods.set(response);
+                    this.paymentMethods.set(response.content);
                   },
                   error: err => console.error("Failed to load payment methods!",
                                               err)
                 });
   }
 
-
   submitTransaction(transaction: any) {
     return this.http.post("http://localhost:8080/api/transactions/create",
                           transaction);
+  }
+
+  getRecentTransactions(): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(`${this.apiUrl}/recent`)
   }
 
 }

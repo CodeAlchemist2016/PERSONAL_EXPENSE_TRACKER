@@ -1,25 +1,63 @@
 import {inject, Injectable, signal, WritableSignal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Account} from '../../models/account.model';
 
 @Injectable({
               providedIn: 'root'
-            })
-export class AccountService {
+            }) export class AccountService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:8080/api/users/balance';
+  private apiUrl = 'http://localhost:8080/api/accounts';
 
-  accounts: WritableSignal<{ accountType: string; balance: number }[]> = signal([]);
+  accountTypes: WritableSignal<string[]> = signal([]);
 
-  loadAccounts(userId: number) {
-    this.http.get<{ accounts: { accountType: string; balance: number }[] }>(`${this.apiUrl}/${userId}`)
-      .subscribe({
-                   next: response => {
-                     console.log("Fetched accounts from API:", response.accounts); // ✅ Debugging API response
-                     this.accounts.set(response.accounts); // ✅ Update signal
-                     console.log("Accounts signal updated:", this.accounts()); // ✅ Confirm signal update
-                   },
-                   error: err => console.error("Failed to fetch account data!", err)
-                 });
+  accounts: WritableSignal<Account[]> = signal([]);
+
+  // Load account types dynamically from the backend
+  loadAccountTypes() {
+    if (this.accountTypes().length ===
+      0) {
+      this.http.get<string[]>(`${this.apiUrl}/types`).
+        subscribe({
+                    next: response => this.accountTypes.set(response),
+                    error: err => console.error("Failed to fetch account types",
+                                                err)
+                  });
+    }
   }
 
+  // Load accounts dynamically from the backend
+  loadAccounts(userId: number) {
+    if (this.accounts().length ===
+      0) {
+      this.http.get<Account[]>(`${this.apiUrl}/${userId}`).
+        subscribe({
+                    next: response => this.accounts.set(response),
+                    error: err => console.error("Failed to fetch accounts!",
+                                                err)
+                  });
+    }
+  }
+
+  // Create a new account
+  createAccount(account: Omit<Account, 'id'>) {
+    return this.http.post<Account>(this.apiUrl,
+                          account);
+  }
+
+  // Update an existing account
+  updateAccount(id: number,
+                updatedAccount: Account) {
+    return this.http.put(`${this.apiUrl}/${id}`,
+                         updatedAccount);
+  }
+
+  // Delete an account
+  deleteAccount(id: number) {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  getAccounts(): Observable<Account[]> {
+    return this.http.get<Account[]>(this.apiUrl);
+  }
 }

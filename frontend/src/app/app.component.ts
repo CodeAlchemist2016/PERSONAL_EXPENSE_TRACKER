@@ -1,14 +1,25 @@
-import {Component} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
+import {Component, inject, signal} from '@angular/core';
+import {Router, RouterLink, RouterOutlet} from '@angular/router';
+import {NgIf} from '@angular/common';
+import {AuthService} from './shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
-             imports: [
-               RouterOutlet
-             ],
+             imports: [RouterOutlet,
+                       RouterLink,
+                       NgIf],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'expense-tracker';
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
+  loggedInUser = signal(this.authService.getLoggedInUser());
+
+  handleLogout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }
