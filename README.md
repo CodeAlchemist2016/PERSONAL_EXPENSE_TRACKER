@@ -2,7 +2,7 @@
 A full-stack application for tracking personal expenses and activities.
 ## Tech Stack
 - Frontend: Angular
-- Backend: Node.js with Express.js (or your chosen backend)
+- Backend: Spring Boot 
 - Database: MySQL
 ## Goals
 - User authentication
