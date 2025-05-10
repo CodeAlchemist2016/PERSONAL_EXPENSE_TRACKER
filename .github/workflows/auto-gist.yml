@@ -20,7 +20,8 @@ jobs:
           COUNT=0
           MAX_FILES=10  # ✅ Adjust batch size based on API limits
 
-          for FILE in $(find . -type f \( -name "*.txt" -o -name "*.md" -o -name "*.js" -o -name "*.ts" -o -name "*.java" -o -name "*.html" -o -name "*.css" \) -not -path "./.git/*" -not -path "./.github/workflows/*"); do
+          # ✅ Explicitly search inside backend/ and frontend/ instead of "."
+          for FILE in $(find backend frontend -type f \( -name "*.txt" -o -name "*.md" -o -name "*.js" -o -name "*.ts" -o -name "*.java" -o -name "*.html" -o -name "*.css" \)); do
             FILENAME=$(basename "$FILE")
             CONTENT=$(jq -Rs . < "$FILE")
             FILES_JSON="$FILES_JSON \"$FILENAME\": { \"content\": $CONTENT },"
@@ -49,4 +50,3 @@ jobs:
               -d "$FILES_JSON"
             echo "Uploaded final batch of files"
           fi
-
