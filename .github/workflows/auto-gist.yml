@@ -12,6 +12,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3  # ✅ Ensures repo is checked out before running script
 
+      - name: Install dependencies
+        run: |
+          sudo apt-get update && sudo apt-get install -y jq  # ✅ Ensures jq is installed
+
       - name: Collect and upload text files in batches
         run: |
           echo "Collecting all text files..."
@@ -22,6 +26,11 @@ jobs:
 
           # ✅ Explicitly search inside backend/ and frontend/ instead of "."
           for FILE in $(find backend frontend -type f \( -name "*.txt" -o -name "*.md" -o -name "*.js" -o -name "*.ts" -o -name "*.java" -o -name "*.html" -o -name "*.css" \)); do
+            if [ ! -s "$FILE" ]; then  # ✅ Skip empty files to prevent "gist file cannot be blank" error
+              echo "Skipping empty file: $FILE"
+              continue
+            fi
+
             FILENAME=$(basename "$FILE")
             CONTENT=$(jq -Rs . < "$FILE")
             FILES_JSON="$FILES_JSON \"$FILENAME\": { \"content\": $CONTENT },"
