@@ -22,7 +22,7 @@ jobs:
           
           FILES_JSON="{ \"description\": \"Complete project files\", \"public\": true, \"files\": {"
 
-          # ✅ Search inside backend/ and frontend/ instead of "."
+          # ✅ Search inside backend/ and frontend/ instead of incorrect paths
           for FILE in $(find backend frontend -type f \( -name "*.txt" -o -name "*.md" -o -name "*.js" -o -name "*.ts" -o -name "*.java" -o -name "*.html" -o -name "*.css" \)); do
             if [ ! -s "$FILE" ]; then  # ✅ Skip empty files to prevent "gist file cannot be blank" error
               echo "Skipping empty file: $FILE"
