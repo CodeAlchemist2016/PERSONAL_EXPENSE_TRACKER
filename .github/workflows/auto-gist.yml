@@ -3,42 +3,41 @@ name: Create a Gist uploading all text files
 on:
   push:
     branches:
-      - main  # Runs when changes are pushed to 'main'
+      - main
 
 jobs:
   create_gist:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # ✅ Ensures repo is checked out before running script
+        uses: actions/checkout@v3
 
       - name: Install dependencies
         run: |
-          sudo apt-get update && sudo apt-get install -y jq  # ✅ Ensures jq is installed
+          sudo apt-get update && sudo apt-get install -y jq zip
 
-      - name: Collect and upload all text files in one gist
+      - name: Collect, compress, and upload text files as a gist
         run: |
           echo "Collecting all text files..."
-          
-          FILES_JSON="{ \"description\": \"Complete project files\", \"public\": true, \"files\": {"
 
-          # ✅ Search inside backend/ and frontend/ instead of incorrect paths
-          for FILE in $(find backend frontend -type f \( -name "*.txt" -o -name "*.md" -o -name "*.js" -o -name "*.ts" -o -name "*.java" -o -name "*.html" -o -name "*.css" \)); do
-            if [ ! -s "$FILE" ]; then  # ✅ Skip empty files to prevent "gist file cannot be blank" error
-              echo "Skipping empty file: $FILE"
-              continue
-            fi
+          # ✅ Create a compressed archive of text files
+          ZIP_FILE="project_files.zip"
+          find backend frontend -type f \( -name "*.txt" -o -name "*.md" -o -name "*.js" -o -name "*.ts" -o -name "*.java" -o -name "*.html" -o -name "*.css" \) -print | zip -@ $ZIP_FILE
 
-            FILENAME=$(basename "$FILE")
-            CONTENT=$(jq -Rs . < "$FILE")
-            FILES_JSON="$FILES_JSON \"$FILENAME\": { \"content\": $CONTENT },"
-          done
+          # ✅ Convert ZIP file content to Base64 (GitHub Gist doesn't support binary files)
+          BASE64_CONTENT=$(base64 -w 0 $ZIP_FILE)
 
-          FILES_JSON="${FILES_JSON%,} }}"  # ✅ Close JSON object
+          # ✅ Create JSON payload for Gist
+          FILES_JSON="{ \"description\": \"Compressed project files\", \"public\": true, \"files\": { \"project_files.zip\": { \"content\": \"$BASE64_CONTENT\" } } }"
 
-          # ✅ Upload all files in a single gist
-          curl -X POST https://api.github.com/gists \
+          # ✅ Upload Gist & Capture Response
+          RESPONSE=$(curl -X POST https://api.github.com/gists \
             -H "Authorization: token ${{ secrets.GIST_TOKEN }}" \
-            -d "$FILES_JSON"
+            -d "$FILES_JSON")
 
-          echo "Uploaded all files in one gist"
+          if echo "$RESPONSE" | jq -e '.id'; then
+            echo "Gist successfully created!"
+          else
+            echo "Failed to create gist. Response: $RESPONSE"
+            exit 1
+          fi
