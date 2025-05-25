@@ -36,7 +36,7 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<UserDTO>> getUsers() {
-        List<User> users = userRepository.findAll(); // ✅ Fetch users from DB
+        List<User> users = userRepository.findAll(); //  Fetch users from DB
 
         List<UserDTO> userDTOs = users.stream()
                 .map(user -> UserDTO.builder()
@@ -47,15 +47,15 @@ public class UserController {
                         .accounts(user.getAccounts().stream()
                                 .map(account -> new AccountSummaryDTO(
                                         account.getId(),
-                                        account.getAccountType().name(), // ✅ Convert Enum to String
+                                        account.getAccountType().name(), //  Convert Enum to String
                                         account.getBalance(),
-                                        account.getMaxSpending(), // ✅ Added maxSpending field
+                                        account.getMaxSpending(), //  Added maxSpending field
                                         account.getTotalTransactions(),
                                         account.getAccountNumber(),
                                         account.getBankName()))
-                                .collect(Collectors.toList())) // ✅ Ensure stream is collected properly
-                        .build()) // ✅ Properly closes the Builder pattern
-                .collect(Collectors.toList()); // ✅ Collect the mapped list
+                                .collect(Collectors.toList())) //  Ensure stream is collected properly
+                        .build()) //  Properly closes the Builder pattern
+                .collect(Collectors.toList()); //  Collect the mapped list
 
         return ResponseEntity.ok(userDTOs);
     }
@@ -110,7 +110,7 @@ public class UserController {
                 .name(user.getName())
                 .email(user.getEmail())
                 .joinDate(user.getJoinDate())
-                .accounts(accountDTOs) // ✅ Attach the list of accounts
+                .accounts(accountDTOs) //  Attach the list of accounts
                 .build();
 
         return ResponseEntity.ok(userDTO);

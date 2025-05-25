@@ -4,13 +4,10 @@ import com.medvedev.backend.dto.AccountSummaryDTO;
 import com.medvedev.backend.entity.Account;
 import com.medvedev.backend.repository.AccountRepository;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.metamodel.SingularAttribute;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;

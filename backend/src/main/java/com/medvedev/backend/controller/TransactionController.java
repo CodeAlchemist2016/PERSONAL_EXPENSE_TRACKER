@@ -12,10 +12,15 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,36 +40,45 @@ public class TransactionController {
     @ApiResponse(responseCode = "404", description = "No transactions found for user")
     @GetMapping
     public ResponseEntity<List<TransactionResponseDTO>> getAllTransactions() {
-        List<Transaction> transactions = transactionRepository.getAllTransactions();
 
-        // Convert transactions to TransactionResponseDTO
-        List<TransactionResponseDTO> responseDTOS = transactions.stream()
-                .map(transaction -> new TransactionResponseDTO(
-                        transaction.getId(),
-                        transaction.getAccount().getAccountType().toString(),
-                        transaction.getCategory().getName(),
-                        transaction.getUser().getName(),
-                        transaction.getAmount(),
-                        transaction.getQuantity(),
-                        transaction.getPrice(),
-                        transaction.getDescription(),
-                        transaction.getTransactionDate(),
-                        transaction.getPaymentMethod().getMethodName(),
-                        transaction.getTransactionType().name(),
-                        transaction.getAccount().getBalance(), // Old balance
-                        transaction.getAccount().getBalance().subtract(transaction.getPrice()) // New balance
-                ))
+        List<TransactionResponseDTO> responseDTOS = transactionRepository.getAllTransactions()
+                .stream()
+                .map(this::convertToDTO)
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(responseDTOS);
+    }
+
+    // Separate method for mapping logic
+    private TransactionResponseDTO convertToDTO(Transaction transaction) {
+        return new TransactionResponseDTO(
+                transaction.getId(),
+                transaction.getAccount().getAccountType().toString(),
+                transaction.getCategory().getName(),
+                transaction.getUser().getName(),
+                transaction.getAmount(),
+                transaction.getQuantity(),
+                transaction.getPrice(),
+                transaction.getDescription(),
+                transaction.getTransactionDate(),
+                transaction.getPaymentMethod().getMethodName(),
+                transaction.getTransactionType().name(),
+                transaction.getAccount().getBalance(),
+                transaction.getAccount().getBalance().subtract(transaction.getPrice())
+        );
     }
 
     @Operation(summary = "Retrieve transactions by user ID", description = "Fetches transactions that belong to a specific user.")
     @ApiResponse(responseCode = "200", description = "Transactions found")
     @ApiResponse(responseCode = "404", description = "No transactions found for user")
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Transaction>> getTransactionsByUserId(@PathVariable Integer userId) {
-        List<Transaction> transactions = transactionRepository.findByUserId(userId);
+    public ResponseEntity<Page<Transaction>> getTransactionsByUserId(@PathVariable Integer userId,
+                                                                     @RequestParam(defaultValue = "0") int page,
+                                                                     @RequestParam(defaultValue = "10") int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Transaction> transactions = transactionRepository.findByUserId(userId, pageable);
+
         return transactions.isEmpty()
                 ? ResponseEntity.notFound().build()
                 : ResponseEntity.ok(transactions);
@@ -74,12 +88,35 @@ public class TransactionController {
     @ApiResponse(responseCode = "200", description = "Transactions found")
     @ApiResponse(responseCode = "404", description = "No transactions found for account")
     @GetMapping("/account/{accountId}")
-    public ResponseEntity<List<Transaction>> getTransactionsByAccountId(@PathVariable Integer accountId) {
-        List<Transaction> transactions = transactionRepository.findByAccountId(accountId);
+    public ResponseEntity<Page<Transaction>> getTransactionsByAccountId(@PathVariable Integer accountId,
+                                                                        @RequestParam(defaultValue = "0") int page,
+                                                                        @RequestParam(defaultValue = "10") int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Transaction> transactions = transactionRepository.findByAccountId(accountId, pageable);
         return transactions.isEmpty()
                 ? ResponseEntity.notFound().build()
                 : ResponseEntity.ok(transactions);
     }
+
+    @Operation(summary = "Retrieve transactions within a date range")
+    @ApiResponse(responseCode = "200", description = "Transactions retrieved successfully")
+    @ApiResponse(responseCode = "404", description = "No transactions found for the given period")
+    @GetMapping("/date-range")
+    public ResponseEntity<List<TransactionResponseDTO>> getTransactionsByDateRange(
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+
+        List<Transaction> transactions = transactionRepository.findByTransactionDateBetween(startDate.atStartOfDay(),
+                endDate.atTime(23, 59, 59));
+
+        List<TransactionResponseDTO> responseDTOS = transactions.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+
+        return transactions.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(responseDTOS);
+    }
+
 
     @Operation(summary = "Create a new transaction", description = "Registers a new transaction")
     @ApiResponses({
