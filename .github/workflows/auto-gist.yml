@@ -22,7 +22,7 @@ jobs:
 
           # ✅ Create a compressed archive of text files
           ZIP_FILE="project_files.zip"
-          find D:/PROJECTS/ANGULAR/PERSONAL_EXPENSE_TRACKER/backend D:/PROJECTS/ANGULAR/PERSONAL_EXPENSE_TRACKER/frontend -type f
+          find D:\ROJECTS\ANGULAR\PERSONAL_EXPENSE_TRACKER\backend D:\PROJECTS\ANGULAR\PERSONAL_EXPENSE_TRACKER\frontend -type f
           \( -name "*.txt" -o -name "*.md" -o -name "*.js" -o -name "*.ts" -o -name "*.java" -o -name "*.html" -o -name "*.css" \) -print | zip -@ $ZIP_FILE
 
           # ✅ Convert ZIP file content to Base64 (GitHub Gist doesn't support binary files)
