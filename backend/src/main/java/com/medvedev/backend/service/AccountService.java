@@ -2,15 +2,14 @@ package com.medvedev.backend.service;
 
 import com.medvedev.backend.dto.AccountSummaryDTO;
 import com.medvedev.backend.entity.Account;
+import com.medvedev.backend.entity.User;
 import com.medvedev.backend.repository.AccountRepository;
+import com.medvedev.backend.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.metamodel.SingularAttribute;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
@@ -20,6 +19,7 @@ import java.util.List;
 public class AccountService {
 
     private final AccountRepository accountRepository;
+    private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
     // Returns List<Account> instead of Optional
@@ -47,8 +47,24 @@ public class AccountService {
     }
 
     public Account createAccount(Account account) {
-        return accountRepository.save(account);
+        if (account.getUser() == null || account.getUser().getUserId() == null) {
+            throw new IllegalArgumentException("User is required for account creation.");
+        }
+
+        // Ensure user exists before saving the account
+        User existingUser = userRepository.findById(account.getUser().getUserId())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        account.setUser(existingUser); // ✅ Assign persisted user
+
+        // Save the account and log result
+        Account savedAccount = accountRepository.save(account);
+        System.out.println("Saved Account: " + savedAccount);
+
+        return savedAccount;
     }
+
+
 
     public Account updateAccount(Integer id, Account updatedAccount) {
         return accountRepository.findById(id)

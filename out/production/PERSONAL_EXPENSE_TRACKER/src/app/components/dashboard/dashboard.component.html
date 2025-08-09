@@ -1,0 +1,60 @@
+<mat-card>
+  <mat-card-title>Dashboard Overview</mat-card-title>
+  <mat-card-content>
+    <div class="dashboard-grid">
+
+      <!-- Total Balance -->
+      <div class="dashboard-box">
+        <h3>Total Balance: {{ totalBalance() | currency }}</h3>
+      </div>
+
+      <!-- Transaction Chart -->
+      <div class="dashboard-box">
+        <ngx-charts-bar-vertical
+          [results]="transactionChartData()"
+          [scheme]="colorScheme"
+          [view]="[700, 400]"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="true"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          [xAxisLabel]="'Month'"
+          [yAxisLabel]="'Expenses'"
+        ></ngx-charts-bar-vertical>
+      </div>
+
+      <!-- Recent Transactions -->
+      <div class="dashboard-box">
+        <h3>Recent Transactions</h3>
+        <table class="transaction-table">
+          <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Amount</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let transaction of recentTransactions()">
+            <td>{{ transaction.date | date }}</td>
+            <td>{{ transaction.description }}</td>
+            <td>{{ transaction.amount | currency }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Account Overview -->
+      <div class="dashboard-box">
+        <h3>Accounts Overview</h3>
+        <ul>
+          <li *ngFor="let account of accounts()">
+            {{ account.accountType }} - {{ account.balance | currency }}
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </mat-card-content>
+</mat-card>

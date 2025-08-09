@@ -1,0 +1,114 @@
+<mat-card>
+  <mat-card-title>Transactions Overview</mat-card-title>
+  <mat-card-content>
+    <table class="transaction-table">
+      <thead>
+      <tr>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Amount</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let transaction of transactions()">
+        <td>{{ transaction.transactionDate }}</td>
+        <td>{{ transaction.categoryName }}</td>
+        <td>{{ transaction.amount | currency }}</td>
+        <td>{{ transaction.description }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>Transaction History</mat-card-title>
+  <mat-card-content>
+    <table class="transaction-table">
+      <thead>
+      <tr>
+        <th>Date</th>
+        <th>User</th>
+        <th>Account Type</th>
+        <th>Expense Category</th>
+        <th>Payment Method</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Amount</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let transaction of transactions()">
+        <td>{{ transaction.transactionDate | date }}</td>
+        <td>{{ transaction.userName }}</td> <!-- ✅ Use userName -->
+        <td>{{ transaction.accountType }}</td>
+        <td>{{ transaction.categoryName }}</td> <!-- ✅ Use categoryName -->
+        <td>{{ transaction.paymentMethodName }}</td> <!-- ✅ Use paymentMethodName -->
+        <td>{{ transaction.quantity }}</td>
+        <td>{{ transaction.price | currency }}</td>
+        <td>{{ transaction.amount | currency }}</td>
+        <td>{{ transaction.description }}</td>
+      </tr>
+
+      </tbody>
+    </table>
+  </mat-card-content>
+</mat-card>
+
+
+
+<mat-card class="transaction-form">
+  <mat-card-title>Add New Transaction</mat-card-title>
+  <mat-card-content>
+    <form #transactionForm="ngForm"
+          (ngSubmit)="submitTransaction()">
+
+      <label>User:</label>
+      <select [(ngModel)]="transaction.userId" name="userId" required>
+        <option *ngFor="let user of users()" [value]="user.id">{{ user.name }}</option>
+      </select>
+
+      <label>Account:</label>
+      <select [(ngModel)]="transaction.accountId" name="accountId" required>
+        <option *ngFor="let account of accounts()" [value]="account.id">{{ account.accountType }}</option>
+      </select>
+
+      <label>Category:</label>
+      <select [(ngModel)]="transaction.categoryId" name="categoryId" required>
+        <option *ngFor="let category of categories()" [value]="category.id">{{ category.name }}</option>
+      </select>
+
+      <label>Payment Method:</label>
+      <select [(ngModel)]="transaction.paymentMethodId" name="paymentMethodId" required>
+        <option *ngFor="let method of paymentMethods()" [value]="method.id">{{ method.methodName }}</option>
+      </select>
+
+
+      <label>Quantity:</label>
+      <input type="number"
+             step="0.01"
+             [(ngModel)]="transaction.quantity"
+             name="quantity"
+             required>
+
+      <label>Price:</label>
+      <input type="number"
+             [(ngModel)]="transaction.price"
+             name="price"
+             required>
+
+      <label>Description:</label>
+      <input type="text"
+             [(ngModel)]="transaction.description"
+             name="description">
+
+      <button type="submit"
+              class="submit-button">Add Transaction
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+

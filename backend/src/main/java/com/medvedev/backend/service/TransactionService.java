@@ -8,6 +8,8 @@ import com.medvedev.backend.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j @Service
@@ -31,14 +32,12 @@ public class TransactionService {
     private final PaymentMethodRepository paymentMethodRepository;
     private final TransactionHistoryRepository transactionHistoryRepository;
 
-    public Optional<List<Transaction>> getTransactionsByUserId(Integer userId) {
-        List<Transaction> transactions = transactionRepository.findByUserId(userId);
-        return transactions.isEmpty() ? Optional.empty() : Optional.of(transactions);
+    public Page<Transaction> getTransactionsByUserId(Integer userId, Pageable pageable) {
+        return transactionRepository.findByUserId(userId, pageable);
     }
 
-    public Optional<List<Transaction>> getTransactionsByAccountId(Integer accountId) {
-        List<Transaction> transactions = transactionRepository.findByAccountId(accountId);
-        return transactions.isEmpty() ? Optional.empty() : Optional.of(transactions);
+    public Page<Transaction> getTransactionsByAccountId(Integer accountId, Pageable pageable) {
+        return transactionRepository.findByAccountId(accountId, pageable);
     }
 
     @Transactional

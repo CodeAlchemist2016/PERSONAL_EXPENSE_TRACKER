@@ -17,8 +17,6 @@ public class JpaConfig {
         try {
             System.out.println("Initializing ModelMapper...");
 
-
-
             System.out.println("ModelMapper configured successfully.");
             return modelMapper;
 
