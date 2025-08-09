@@ -1,0 +1,70 @@
+.account-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow-x: auto;
+  display: block;
+
+  th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #3498db;
+    color: white;
+    text-align: left;
+  }
+
+  td {
+    text-align: right;
+    background-color: #f8f9fa; // Subtle contrast for readability
+  }
+
+  tr:hover {
+    background-color: rgba(52, 152, 219, 0.1); // Light hover effect
+    transition: background-color 0.3s ease;
+  }
+}
+
+mat-card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Softer shadow for depth
+  border-radius: 8px;
+}
+
+mat-card-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #3498db;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.account-form {
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+form {
+  display: flex;
+  flex-direction: column; // ✅ Makes fields stack vertically
+  gap: 15px; // ✅ Adds spacing between fields
+  max-width: 400px;
+  margin: auto;
+}
+
+.submit-button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+
+  &:hover {
+    background-color: #2980b9;
+    transition: background-color 0.3s ease;
+  }
+}
