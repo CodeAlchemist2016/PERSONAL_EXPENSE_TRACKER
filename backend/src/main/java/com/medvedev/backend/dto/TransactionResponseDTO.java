@@ -14,16 +14,16 @@ import java.time.LocalDateTime;
 @Builder
 public class TransactionResponseDTO {
     private Integer id;
-    private String accountType; // Derived from Account
-    private String categoryName; // Derived from Category
-    private String userName; // Derived from User
     private BigDecimal amount;
-    private BigDecimal quantity;
     private BigDecimal price;
+    private BigDecimal quantity;
     private String description;
     private LocalDateTime transactionDate;
-    private String paymentMethodName; // Derived from PaymentMethod
     private String transactionType;
+    private String categoryName; // Derived from Category
+    private String accountType; // Derived from Account
+    private String paymentMethodName; // Derived from PaymentMethod
+    private String userName; // Derived from User
     private BigDecimal oldBalance;
     private BigDecimal newBalance;
 }

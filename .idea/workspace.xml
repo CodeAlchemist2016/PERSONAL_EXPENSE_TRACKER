@@ -4,31 +4,67 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a6a86ea-2de7-4377-990a-ac2aec7e38d2" name="Changes" comment="">
+    <list default="true" id="4a6a86ea-2de7-4377-990a-ac2aec7e38d2" name="Changes" comment="Before Angular Update">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.idea_old/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.idea_old/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.idea_old/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.idea_old/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.idea_old/git_toolbox_prj.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.idea_old/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.idea_old/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.idea_old/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.idea_old/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/medvedev/backend/dto/TransactionResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/medvedev/backend/dto/TransactionResponseDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.idea_old/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.idea_old/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.idea_old/frontend.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.idea_old/git_toolbox_prj.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.idea_old/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.idea_old/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.idea_old/watcherTasks.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/accounts/accounts.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/accounts/accounts.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/accounts/accounts.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/budgets/budgets.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/budgets/budgets.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/budgets/budgets.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/dashboard/dashboard.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/dashboard/dashboard.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/dashboard/dashboard.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/login/login.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/login/login.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/login/login.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/transactions/transactions.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/transactions/transactions.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/transactions/transactions.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/transactions/transactions.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/users/users.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/users/users.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/users/users.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/models/account.model.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/models/transaction.model.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/components/account-form/account-form.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/components/account-form/account-form.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/components/account-form/account-form.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/services/account.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/services/auth.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/services/transactions.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/services/user.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/styles/global.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/utils/utils.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tsconfig.app.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tsconfig.app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tsconfig.spec.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tsconfig.spec.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -38,18 +74,41 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;CodeAlchemist2016&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {}
+}]]></component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="frontend-legacy" />
+                    <option name="lastUsedInstant" value="1757106188" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="updating-angular-frontend-to-angular-20.1.5" />
+                    <option name="lastUsedInstant" value="1757106187" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/CodeAlchemist2016/PERSONAL_EXPENSE_TRACKER",
+    "accountId": "cbd84619-8e76-4eab-b8f2-1656bad561e9"
   }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/CodeAlchemist2016/PERSONAL_EXPENSE_TRACKER&quot;,
-    &quot;accountId&quot;: &quot;0ace5e17-06a9-4e7a-a230-7440c31ed197&quot;
-  }
-}</component>
+}]]></component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:/php-8.4.12/php.exe" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -79,7 +138,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "Spring Boot.Backend.executor": "Run",
     "Spring Boot.BackendApplication.executor": "Run",
-    "git-widget-placeholder": "updating-angular-frontend-to-angular-20.1.5",
+    "git-widget-placeholder": "frontend-legacy",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/PROJECTS/ANGULAR/PERSONAL_EXPENSE_TRACKER",
     "node.js.detected.package.eslint": "true",
@@ -91,7 +150,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.352",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.ignored.files",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "ts.external.directory.path": "D:\\PROJECTS\\ANGULAR\\PERSONAL_EXPENSE_TRACKER\\frontend\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   },
@@ -107,7 +166,7 @@
       <command value="mvn clean install -U" />
     </option>
   </component>
-  <component name="RunManager" selected="Compound.Compound">
+  <component name="RunManager" selected="npm.Frontend">
     <configuration name="Compound" type="CompoundRunConfigurationType">
       <toRun name="Frontend" type="js.build_tools.npm" />
       <toRun name="BackendApplication" type="SpringBootApplicationConfigurationType" />
@@ -140,8 +199,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.23892.409" />
-        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-IU-252.23892.409" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.25557.131" />
+        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-IU-252.25557.131" />
       </set>
     </attachedChunks>
   </component>
@@ -158,7 +217,22 @@
       <workItem from="1754683066966" duration="1227000" />
       <workItem from="1754684339372" duration="803000" />
       <workItem from="1754725063522" duration="4254000" />
+      <workItem from="1754752611005" duration="7748000" />
+      <workItem from="1754847166733" duration="5909000" />
+      <workItem from="1755343548156" duration="404000" />
+      <workItem from="1756350136834" duration="912000" />
+      <workItem from="1757078162133" duration="3278000" />
+      <workItem from="1757097922981" duration="7904000" />
     </task>
+    <task id="LOCAL-00001" summary="Before Angular Update">
+      <option name="closed" value="true" />
+      <created>1754747957227</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1754747957227</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,6 +248,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Before Angular Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Before Angular Update" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
