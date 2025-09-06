@@ -5,16 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a6a86ea-2de7-4377-990a-ac2aec7e38d2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/medvedev/backend/service/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/medvedev/backend/service/AccountService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/accounts/accounts.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/accounts/accounts.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/users/users.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/users/users.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/users/users.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/users/users.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/models/account.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/models/account.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/components/account-form/account-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/components/account-form/account-form.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/components/account-form/account-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/components/account-form/account-form.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/services/account.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/services/account.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/services/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/services/user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.idea_old/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.idea_old/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.idea_old/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.idea_old/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.idea_old/git_toolbox_prj.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.idea_old/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.idea_old/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.idea_old/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.idea_old/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.idea_old/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.idea_old/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.idea_old/frontend.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.idea_old/git_toolbox_prj.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.idea_old/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.idea_old/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.idea_old/watcherTasks.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +31,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -65,7 +79,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "Spring Boot.Backend.executor": "Run",
     "Spring Boot.BackendApplication.executor": "Run",
-    "git-widget-placeholder": "refactor__25.05.2025",
+    "git-widget-placeholder": "updating-angular-frontend-to-angular-20.1.5",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/PROJECTS/ANGULAR/PERSONAL_EXPENSE_TRACKER",
     "node.js.detected.package.eslint": "true",
